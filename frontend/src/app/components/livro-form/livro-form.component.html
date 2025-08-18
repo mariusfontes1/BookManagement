@@ -1,0 +1,124 @@
+<div class="form-container">
+  <!-- Header -->
+  <div class="header">
+    <button mat-icon-button (click)="onCancel()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>{{ pageTitle }}</h1>
+  </div>
+
+  <!-- Loading indicator -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>{{ isEditMode ? 'Carregando dados do livro...' : 'Salvando livro...' }}</p>
+  </div>
+
+  <!-- Formulário -->
+  <mat-card *ngIf="!isLoading" class="form-card">
+    <mat-card-content>
+      <form [formGroup]="livroForm" (ngSubmit)="onSubmit()" class="livro-form">
+        
+        <!-- Campo Título -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Título do Livro</mat-label>
+          <input matInput 
+                 formControlName="titulo" 
+                 placeholder="Digite o título do livro"
+                 maxlength="200">
+          <mat-icon matSuffix>book</mat-icon>
+          <mat-hint>Máximo 200 caracteres</mat-hint>
+          <mat-error *ngIf="isFieldInvalid('titulo')">
+            {{ getFieldError('titulo') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Campo Autor -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Autor</mat-label>
+          <input matInput 
+                 formControlName="autor" 
+                 placeholder="Digite o nome do autor"
+                 maxlength="100">
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-hint>Máximo 100 caracteres</mat-hint>
+          <mat-error *ngIf="isFieldInvalid('autor')">
+            {{ getFieldError('autor') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Campo Gênero -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Gênero</mat-label>
+          <input matInput 
+                 formControlName="genero" 
+                 placeholder="Digite o gênero do livro"
+                 [matAutocomplete]="generoAuto"
+                 maxlength="50">
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-hint>Máximo 50 caracteres</mat-hint>
+          <mat-error *ngIf="isFieldInvalid('genero')">
+            {{ getFieldError('genero') }}
+          </mat-error>
+          
+          <!-- Autocomplete para gêneros -->
+          <mat-autocomplete #generoAuto="matAutocomplete">
+            <mat-option *ngFor="let genero of generos" [value]="genero">
+              {{ genero }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <!-- Campo Ano -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ano de Publicação</mat-label>
+          <input matInput 
+                 type="number" 
+                 formControlName="ano" 
+                 placeholder="Digite o ano de publicação"
+                 [min]="1"
+                 [max]="getCurrentYear()">
+          <mat-icon matSuffix>calendar_today</mat-icon>
+          <mat-hint>Entre 1 e {{ getCurrentYear() }}</mat-hint>
+          <mat-error *ngIf="isFieldInvalid('ano')">
+            {{ getFieldError('ano') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Botões de ação -->
+        <div class="form-actions">
+          <button mat-button 
+                  type="button" 
+                  (click)="onCancel()" 
+                  class="cancel-button">
+            <mat-icon>cancel</mat-icon>
+            Cancelar
+          </button>
+          
+          <button mat-raised-button 
+                  color="primary" 
+                  type="submit"
+                  [disabled]="livroForm.invalid || isLoading"
+                  class="submit-button">
+            <mat-icon>{{ isEditMode ? 'save' : 'add' }}</mat-icon>
+            {{ isEditMode ? 'Atualizar' : 'Adicionar' }} Livro
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Preview do livro (quando válido) -->
+  <mat-card *ngIf="!isLoading && livroForm.valid" class="preview-card">
+    <mat-card-header>
+      <mat-card-title>📖 Preview</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="preview-content">
+        <h3>{{ livroForm.get('titulo')?.value }}</h3>
+        <p><strong>Autor:</strong> {{ livroForm.get('autor')?.value }}</p>
+        <p><strong>Gênero:</strong> {{ livroForm.get('genero')?.value }}</p>
+        <p><strong>Ano:</strong> {{ livroForm.get('ano')?.value }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
