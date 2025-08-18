@@ -17,7 +17,7 @@ public class LivrosController : ControllerBase
     /// <summary>
     /// Retorna a lista de todos os livros
     /// </summary>
-    [HttpGet("ListaLivros")]
+    [HttpGet]
     public async Task<ActionResult<IEnumerable<LivroDTO>>> GetLivros()
     {
         try
@@ -34,7 +34,7 @@ public class LivrosController : ControllerBase
     /// <summary>
     /// Retorna os detalhes de um livro específico
     /// </summary>
-    [HttpGet("DetalhesLivro/{id}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<LivroDTO>> GetLivro(int id)
     {
         try
@@ -57,7 +57,7 @@ public class LivrosController : ControllerBase
     /// <summary>
     /// Adiciona um novo livro
     /// </summary>
-    [HttpPost("AdicionaLivro")]
+    [HttpPost]
     public async Task<ActionResult<LivroDTO>> CreateLivro(CreateLivroDTO createLivroDTO)
     {
         try
@@ -79,7 +79,7 @@ public class LivrosController : ControllerBase
     /// <summary>
     /// Atualiza as informações de um livro existente
     /// </summary>
-    [HttpPut("AtualizaLivro/{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateLivro(int id, UpdateLivroDTO updateLivroDTO)
     {
         try
@@ -107,7 +107,7 @@ public class LivrosController : ControllerBase
     /// <summary>
     /// Exclui um livro
     /// </summary>
-    [HttpDelete("ExcluiLivro/{id}")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteLivro(int id)
     {
         try
