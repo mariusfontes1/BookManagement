@@ -360,3 +360,8 @@ FodyWeavers.xsd
 
 ## Linux
 *~
+/frontend/.gitignore.bak
+/frontend/angular.json.bak
+/frontend/package.json.bak
+/frontend/tsconfig.app.json.bak
+/frontend/tsconfig.json.bak

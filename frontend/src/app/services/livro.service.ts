@@ -8,7 +8,7 @@ import { Livro, CreateLivro, UpdateLivro } from '../models/livro.model';
   providedIn: 'root'
 })
 export class LivroService {
-  private readonly apiUrl = 'https://localhost:7000/api/livros';
+  private readonly apiUrl = 'https://localhost:5000/api/Livros';
 
   constructor(private http: HttpClient) { }
 

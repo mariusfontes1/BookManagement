@@ -1,4 +1,4 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
 /dist
@@ -40,3 +40,62 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Angular specific
+*.tsbuildinfo
+.angular/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Package manager lock files
+package-lock.json
+yarn.lock
+
+# Build outputs
+*.js.map
+*.css.map
+
+# Log files
+*.log
+
+# Test outputs
+/coverage/
+/.nyc_output/
+karma.conf.js
+
+# E2E test outputs
+/e2e/reports/
+/e2e/screenshots/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Temporary folders
+tmp/
+temp/
