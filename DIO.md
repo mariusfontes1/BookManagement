@@ -1,1 +1,1 @@
-# Curso GIT - DIO
+# Curso de GIT - DIO
